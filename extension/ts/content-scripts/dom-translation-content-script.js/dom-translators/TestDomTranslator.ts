@@ -20,6 +20,9 @@ export class TestDomTranslator extends BaseDomTranslator {
       "Primeros pasos",
       "Ayuda",
       "Contacto",
+      "<div id=n2>la enciclopedia de contenido libre<br>que <b id=n3>todos pueden editar</b>. </div>",
+      "Buscar en 1 659 715 artículos",
+      "<div id=n5><br> artículos <b id=n6>en español</b>.</div>",
     ],
     en: [
       "Hello world",
@@ -35,6 +38,9 @@ export class TestDomTranslator extends BaseDomTranslator {
       "First steps",
       "Help",
       "Contact",
+      '<div id="n2">the free content encyclopedia that<br>everyone <b id="n3">can edit. </b> </div>',
+      "Search in 1 659 715 articles",
+      '<div id="n5"><br> articles <b id="n6">in Spanish.</b></div>',
     ],
   };
 

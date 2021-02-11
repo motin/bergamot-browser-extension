@@ -30,6 +30,7 @@ describe(testSuiteName, function() {
     "punctuation",
     "mid-sentence-break",
     "es.wikipedia.org-2021-01-20-welcome-box",
+    "es.wikipedia.org-2021-02-10-welcome-box",
   ];
   const diffs = [];
   const allTextsToTranslate = [];
