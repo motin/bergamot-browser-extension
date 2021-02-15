@@ -24,7 +24,11 @@ async function generateManifest({ dotEnvPath }) {
     incognito: "spanning", // Share context between private and non-private windows
     default_locale: "en_US",
     background: {
-      scripts: ["commons.js", "background.js"],
+      scripts: [
+        "commons.js",
+        "background.js",
+        "wasm/bergamot-translator-worker.js",
+      ],
     },
     content_scripts: [
       {

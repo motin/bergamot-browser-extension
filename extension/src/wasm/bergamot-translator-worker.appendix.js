@@ -4,6 +4,7 @@ addOnPreMain(function() {
   let model;
 
   const log = (message) => {
+    console.debug(`Translation worker log message: ${message}`);
     postMessage({
       type: "log",
       message,
@@ -182,4 +183,18 @@ addOnPreMain(function() {
   // Send a message indicating that the worker is ready to receive WASM-related messages
   postMessage("ready");
   log("The worker is ready to receive translation-related messages")
+
+  // TMP
+  setTimeout(() => {
+    console.log("10 seconds have passed since script ready - Loading model and translating a test string - this will lock up the background extension thread");
+    loadModel();
+    onmessage({
+      type: "translate",
+      requestId: "foo",
+      translateParams: {
+        texts: ["foo", "bar"],
+      }
+    });
+  },10000);
+
 });
