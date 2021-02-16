@@ -56,24 +56,45 @@ const isBlockFrameOrSubclass = (element: HTMLElement) => {
     (blockLevelElementTagNames.includes(nodeTagName) ||
       element.style.display === "block") &&
     element.style.display !== "inline";
+  console.debug(
+    "isBlockFrameOrSubclass",
+    { nodeTagName },
+    element.style.display,
+    { result },
+  );
   return result;
 };
 
+let nestingLevel = 0;
 export const getTranslationNodes = (
   rootElement: HTMLElement,
   seenTranslationNodes: Node[] = [],
   limit = 15000,
 ): TranslationNode[] => {
+  nestingLevel++;
+  console.debug(
+    "getTranslationNodes",
+    { rootElement, nestingLevel },
+    rootElement.outerHTML,
+  );
   const translationNodes: TranslationNode[] = [];
 
   // Query child elements in order to explicitly skip the root element from being classified as a translation node
   const childElements = <HTMLCollectionOf<HTMLElement>>rootElement.children;
+  console.debug("childElements.length", childElements.length);
   for (let i = 0; i < limit && i < childElements.length; i++) {
     const childElement: HTMLElement = childElements[i];
 
     const tagName = childElement.tagName.toLowerCase();
     const isElementNode = childElement.nodeType === Node.ELEMENT_NODE;
     const isTextNode = childElement.nodeType === Node.TEXT_NODE;
+    console.debug("childElement", {
+      i,
+      childElement,
+      tagName,
+      isElementNode,
+      isTextNode,
+    });
 
     if (isTextNode) {
       console.warn(
@@ -102,6 +123,7 @@ export const getTranslationNodes = (
     const nodeHasTextForTranslation = hasTextForTranslation(
       childElement.textContent,
     );
+    console.debug({ nodeHasTextForTranslation });
 
     // Only empty or non-translatable content in this part of the tree
     if (!nodeHasTextForTranslation) {
@@ -119,6 +141,7 @@ export const getTranslationNodes = (
       .filter(hasTextForTranslation);
     const isTranslationNode =
       childChildTextNodesWithTextForTranslation.length > 0;
+    console.debug({ isTranslationNode });
 
     if (isTranslationNode) {
       // At this point, we know we have a translation node at hand, but we need
@@ -127,6 +150,11 @@ export const getTranslationNodes = (
 
       // Block elements are translation roots
       isTranslationRoot = isBlockFrameOrSubclass(childElement);
+      console.debug(
+        "isTranslationRoot by block frame or sub-class: ",
+        isTranslationRoot,
+      );
+
       // If an element is not a block element, it still
       // can be considered a translation root if all ancestors
       // of this element are not translation nodes
@@ -145,6 +173,10 @@ export const getTranslationNodes = (
           }
         }
         isTranslationRoot = !ancestorWasATranslationNode;
+        console.debug(
+          "isTranslationRoot after parent check: ",
+          isTranslationRoot,
+        );
       }
 
       const translationNode = {
@@ -152,6 +184,7 @@ export const getTranslationNodes = (
         isTranslationRoot,
       };
 
+      console.debug({ translationNode });
       translationNodes.push(translationNode);
     }
 
@@ -162,9 +195,11 @@ export const getTranslationNodes = (
         seenTranslationNodes,
         limit - translationNodes.length,
       );
+      console.log({ childTranslationNodes });
       translationNodes.push(...childTranslationNodes);
     }
   }
 
+  nestingLevel--;
   return translationNodes;
 };
