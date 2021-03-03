@@ -83,7 +83,7 @@
     "postcss-scss": "^3.0.2",
     "prettier": "^1.11.0",
     "remotedev-server": "^0.3.1",
-    "selenium-webdriver": "^4.0.0-beta.1",
+    "selenium-webdriver": "^3.6.0",
     "source-map-loader": "^0.2.4",
     "source-map-support": "^0.5.19",
     "style-loader": "^1.1.3",

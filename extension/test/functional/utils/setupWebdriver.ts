@@ -1,5 +1,6 @@
 import * as cmd from "selenium-webdriver/lib/command";
-import { Options } from "selenium-webdriver/firefox";
+// @ts-ignore
+import { Options, Profile } from "selenium-webdriver/firefox";
 import { Builder, WebDriver as OriginalWebDriver } from "selenium-webdriver";
 import { normalizeBinary } from "fx-runner/lib/utils";
 import * as fs from "fs";
@@ -45,11 +46,14 @@ export const setupWebdriver = {
    * @returns {Promise<*>} driver A configured Firefox webdriver object
    */
   promiseSetupDriver: async (FIREFOX_PREFERENCES): Promise<WebDriver> => {
-    const options = new Options();
+    const profile = new Profile();
 
     Object.keys(FIREFOX_PREFERENCES).forEach(key => {
-      options.setPreference(key, FIREFOX_PREFERENCES[key]);
+      profile.setPreference(key, FIREFOX_PREFERENCES[key]);
     });
+
+    const options = new Options();
+    options.setProfile(profile);
 
     const builder = new Builder()
       .forBrowser("firefox")
