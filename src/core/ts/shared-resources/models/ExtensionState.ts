@@ -152,6 +152,17 @@ export class ExtensionState extends Model({
         const wordCountVisibleInViewport = documentTranslationStates
           .map(dts => dts.wordCountVisibleInViewport)
           .reduce((a, b) => a + b, 0);
+        /*
+        const translatedWordCount = documentTranslationStates
+          .map(dts => dts.translatedWordCount)
+          .reduce((a, b) => a + b, 0);
+        const translatedWordCountVisible = documentTranslationStates
+          .map(dts => dts.translatedWordCountVisible)
+          .reduce((a, b) => a + b, 0);
+        const translatedWordCountVisibleInViewport = documentTranslationStates
+          .map(dts => dts.translatedWordCountVisibleInViewport)
+          .reduce((a, b) => a + b, 0);
+         */
         const totalModelLoadWallTimeMs = documentTranslationStates
           .map(dts => dts.totalModelLoadWallTimeMs)
           .reduce((a, b) => a + b, 0);
@@ -282,6 +293,11 @@ export class ExtensionState extends Model({
           wordCount,
           wordCountVisible,
           wordCountVisibleInViewport,
+          /*
+          translatedWordCount,
+          translatedWordCountVisible,
+          translatedWordCountVisibleInViewport,
+           */
           translationInitiationTimestamp,
           totalModelLoadWallTimeMs,
           totalTranslationWallTimeMs,

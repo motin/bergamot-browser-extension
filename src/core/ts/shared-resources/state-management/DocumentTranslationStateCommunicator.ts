@@ -113,6 +113,12 @@ export class DocumentTranslationStateCommunicator {
         translationRequestProgress,
     );
 
+    /*
+    const translatedWordCount = -1;
+    const translatedWordCountVisible = -1;
+    const translatedWordCountVisibleInViewport = -1;
+     */
+
     const translationInitiationTimestamps = translationRequestProgressEntries.map(
       (trp: TranslationRequestProgress) => trp.initiationTimestamp,
     );
@@ -155,6 +161,25 @@ export class DocumentTranslationStateCommunicator {
       translationRequestProgressEntries.filter(
         (trp: TranslationRequestProgress) => !trp.translationFinished,
       ).length === 0;
+
+    /*
+              {
+            op: "replace",
+            path: ["translatedWordCount"],
+            value: translatedWordCount,
+          },
+          {
+            op: "replace",
+            path: ["translatedWordCountVisible"],
+            value: translatedWordCountVisible,
+          },
+          {
+            op: "replace",
+            path: ["translatedWordCountVisibleInViewport"],
+            value: translatedWordCountVisibleInViewport,
+          },
+
+     */
 
     // Merge model download progress
     const emptyDownloadProgress: ModelDownloadProgress = {

@@ -117,6 +117,7 @@ export class DomTranslatorError extends Error {
 export class BaseDomTranslator extends MinimalDomTranslator {
   public translatedCharacterCount: number;
   public errorsEncountered: Error[];
+  // public translatedWordCount: number;
   public partialSuccess: boolean;
   public derivedTranslationDocumentData: DerivedTranslationDocumentData;
   private translationApiClient: TranslationApiClient;
@@ -147,6 +148,7 @@ export class BaseDomTranslator extends MinimalDomTranslator {
     super(translationDocument, sourceLanguage, targetLanguage);
     this.translatedCharacterCount = 0;
     this.errorsEncountered = [];
+    // this.translatedWordCount = 0;
     this.partialSuccess = false;
     this.translationApiClient = translationApiClient;
     this.parseChunkResult = parseChunkResult;
