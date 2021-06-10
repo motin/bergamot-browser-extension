@@ -120,7 +120,12 @@ export const project = (
   detaggedString: DetaggedString,
   translatedString: string,
 ): string => {
-  // console.info("project", { detaggedString, translatedString });
+  const detaggedTranslatedString = detag(translatedString);
+  console.info("project", {
+    detaggedString,
+    translatedString,
+    detaggedTranslatedString,
+  });
 
   // Return the translated string as is if there were no tokens in the original string
   if (
@@ -142,6 +147,10 @@ export const project = (
   const remainingTranslatedStringWords = [...translatedStringWords];
   let whitespaceHaveBeenInjectedSinceTheLastWordWasInjected = true;
   const projectedStringParts = detaggedString.tokens.map((token): string => {
+    console.debug("--- inject tags loop ---", {
+      remainingTranslatedStringWords,
+      token,
+    });
     const determineProjectedStringPart = () => {
       if (token.type === "word") {
         const correspondingTranslatedWord = remainingTranslatedStringWords.shift();
@@ -172,9 +181,11 @@ export const project = (
       throw new Error(`Unexpected token type: ${token.type}`);
     };
     const projectedStringPart = determineProjectedStringPart();
+    console.log({ projectedStringPart });
     return projectedStringPart;
   });
 
+  console.debug({ projectedStringParts });
   let projectedString = projectedStringParts.join("");
 
   // Add any remaining translated words to the end
