@@ -2,7 +2,22 @@
 
 process.env.UI = "cross-browser-ui";
 
+export const crossBrowserUiEntrypoints = {
+  background: `../cross-browser-ui/ts/background-scripts/background.js/index.ts`,
+  "options-ui":
+    "../cross-browser-ui/ts/extension-pages/options-ui.js/index.tsx",
+  "get-started":
+    "../cross-browser-ui/ts/extension-pages/get-started.js/index.tsx",
+  "main-interface":
+    "../cross-browser-ui/ts/extension-pages/main-interface.js/index.tsx",
+};
+
 const coreConfig = require("../core/webpack.config");
+
+coreConfig.entry = {
+  ...coreConfig.entry,
+  ...crossBrowserUiEntrypoints,
+};
 
 const postcssOptions = require("./postcss.config");
 

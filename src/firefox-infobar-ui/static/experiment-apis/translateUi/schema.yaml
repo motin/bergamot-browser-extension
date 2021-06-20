@@ -25,41 +25,41 @@
   events:
     - name: onInfoBarDisplayed
       type: function
-      description: Foo
+      description: onInfoBarDisplayed
       parameters: [ ]
     - name: onSelectTranslateTo
       type: function
-      description: Foo
+      description: onSelectTranslateTo
       parameters: [ ]
     - name: onSelectTranslateFrom
       type: function
-      description: Foo
+      description: onSelectTranslateFrom
       parameters: [ ]
     - name: onInfoBarClosed
       type: function
-      description: Foo
+      description: onInfoBarClosed
       parameters: [ ]
     - name: onNeverTranslateSelectedLanguage
       type: function
-      description: Foo
+      description: onNeverTranslateSelectedLanguage
       parameters: [ ]
     - name: onNeverTranslateThisSite
       type: function
-      description: Foo
+      description: onNeverTranslateThisSite
       parameters: [ ]
     - name: onShowOriginalButtonPressed
       type: function
-      description: Foo
+      description: onShowOriginalButtonPressed
       parameters: [ ]
     - name: onShowTranslatedButtonPressed
       type: function
-      description: Foo
+      description: onShowTranslatedButtonPressed
       parameters: [ ]
     - name: onTranslateButtonPressed
       type: function
-      description: Foo
+      description: onTranslateButtonPressed
       parameters: [ ]
     - name: onNotNowButtonPressed
       type: function
-      description: Foo
+      description: onNotNowButtonPressed
       parameters: [ ]

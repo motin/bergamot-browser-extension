@@ -28,20 +28,18 @@ const dotEnvPath =
 const copyPluginPatterns = [];
 
 // Set entry points based on build variant
-const entry = {
-  background: `../${ui}/ts/background-scripts/background.js/index.ts`,
+export const coreEntrypoints = {
   "dom-translation-content-script":
     "../core/ts/content-scripts/dom-translation-content-script.js/index.ts",
   "translation-worker":
     "../core/ts/web-worker-scripts/translation-worker.js/index.ts",
 };
+if (targetEnvironment !== "production") {
+  coreEntrypoints.tests = "../../test/in-browser/ts/tests.js/index.ts";
+}
+
+// Bundle different sets of static files based on build variant
 if (ui === "cross-browser-ui") {
-  entry["options-ui"] =
-    "../cross-browser-ui/ts/extension-pages/options-ui.js/index.tsx";
-  entry["get-started"] =
-    "../cross-browser-ui/ts/extension-pages/get-started.js/index.tsx";
-  entry["main-interface"] =
-    "../cross-browser-ui/ts/extension-pages/main-interface.js/index.tsx";
   copyPluginPatterns.push({
     from: "../cross-browser-ui/static",
     to: buildPath,
@@ -53,7 +51,6 @@ if (ui === "cross-browser-ui") {
   });
 }
 if (targetEnvironment !== "production") {
-  entry.tests = "../../test/in-browser/ts/tests.js/index.ts";
   copyPluginPatterns.push({
     from: "../../test/in-browser/static",
     to: buildPath,
@@ -135,7 +132,7 @@ if (
 }
 
 module.exports = {
-  entry,
+  entry: coreEntrypoints,
   output: {
     path: buildPath,
     filename: "[name].js",
